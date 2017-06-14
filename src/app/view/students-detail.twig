@@ -1,0 +1,64 @@
+{% extends '_layout.twig' %}
+
+{% block title %}
+    Students
+{% endblock %}
+
+{% block breadcrumb %}
+    <i class="student icon"></i>
+    <div class="active section">Students</div>
+    <i class="right angle icon divider"></i>
+    <i class="info icon"></i>
+    <div class="active section">
+        {{ person['student'] }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <h3>Student info</h3>
+    <table class="ui orange table">
+        <thead>
+        <tr>
+            <th><i class="angle up icon"></i> Year</th>
+            <th><i class="home icon"></i> Classroom</th>
+            <th><i class="user icon"></i> Teacher</th>
+            <th><i class="line chart icon"></i> Grade (avg)</th>
+            <th><i class="file text outline icon"></i> Scholarships (sum)</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ person['schoolyear'] }}.</td>
+                <td>{{ person['classroom'] }}</td>
+                <td>{{ person['teacher'] }}</td>
+                <td>{{ person['avg_grade']|round(2) }}</td>
+                <td>{{ person['sum_scholarship'] }} €</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <h3>Teaching info</h3>
+    <table class="ui orange table">
+        <thead>
+        <tr>
+            <th><i class="book icon"></i> Subject</th>
+            <th><i class="user icon"></i> Teacher</th>
+            <th><i class="home icon"></i> Classroom</th>
+            <th><i class="user icon"></i> Time</th>
+            <th><i class="user icon"></i> Day</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for teach in teaching %}
+                <tr>
+                    <td>{{ teach.subject }}</td>
+                    <td>{{ teach.teacher }}</td>
+                    <td>{{ teach.classroom }}</td>
+                    <td>{{ teach.time }}</td>
+                    <td>{{ teach.day }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

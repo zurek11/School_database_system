@@ -1,0 +1,76 @@
+html, body {
+  margin: 0px;
+  padding: 0px; }
+
+p, a, h1, h2, h3, h4, h5, h6, ul, li, form {
+  margin: 0px;
+  padding: 0px; }
+
+a {
+  text-decoration: none;
+  cursor: pointer; }
+
+ul {
+  list-style: none; }
+
+img {
+  border: 0px;
+  /* IE */ }
+
+input {
+  border-radius: 0;
+  outline: none;
+  background-color: transparent; }
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none; }
+
+section {
+  clear: both;
+  float: none;
+  overflow: hidden;
+  display: block;
+  position: relative; }
+
+.cleaner {
+  clear: both;
+  float: none; }
+
+.visible {
+  display: block !important; }
+
+.invisible {
+  display: none !important; }
+
+.float-left {
+  display: block;
+  float: left; }
+
+.float-right {
+  display: block;
+  float: right; }
+
+.vertical-wrapper {
+  height: 100%;
+  display: table; }
+
+.vertical-middle {
+  display: table-cell;
+  vertical-align: middle; }
+
+/* disable text selection highlighting */
+.dtsh {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE/Edge */
+  user-select: none;
+  cursor: context-menu; }
+
+/*# sourceMappingURL=common-styles.css.map */

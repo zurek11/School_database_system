@@ -1,0 +1,146 @@
+{% extends '_layout.twig' %}
+
+{% block title %}
+     Students
+{% endblock %}
+
+{% block breadcrumb %}
+    <i class="student icon"></i>
+    <div class="active section">Students</div>
+{% endblock %}
+
+{% block content %}
+    <a href="/student/add" class="ui orange button button-independent">
+        <i class="add icon"></i>
+        Add
+    </a>
+    <div class="ui icon input" style="float: right;">
+        <input type="text" id="search" placeholder="Search..." value="{{ search.search }}" />
+        <i class="search icon"></i>
+    </div>
+    <table class="ui orange table">
+        <thead>
+            <tr>
+                <th><i class="user icon"></i> Name</th>
+                <th><i class="user icon"></i> Surname</th>
+                <th><i class="file text icon"></i> Scholarships</th>
+                <th><i class="settings icon"></i> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in people %}
+                <tr>
+                    <td>{{ person.name }}</td>
+                    <td>{{ person.surname }}</td>
+                    <td>{{ person.count_scholarship }}</td>
+                    <td>
+                        <a class="ui icon button orange tooltip action" href="/student/{{ person.id }}/detail" data-inverted="" data-tooltip="Detail" data-position="top center">
+                            <i class="info icon"></i>
+                        </a>
+
+                        <a class="ui icon button orange tooltip action" href="/student/{{ person.id }}/edit" data-inverted="" data-tooltip="Edit" data-position="top center">
+                            <i class="edit icon"></i>
+                        </a>
+
+                        <a class="ui icon button red tooltip action" data-id="{{ person.id }}" data-target="#delete" data-inverted="" data-tooltip="Delete" data-position="top center">
+                            <i class="trash icon"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="float: right;">
+        <button id="previous" class="ui left attached button"><i class="left arrow icon"></i>Previous</button>
+        <div class="ui input">
+            <input type="number" class="number" id="offset" placeholder="Offset" value="{{ search.offset }}" />
+        </div>
+        <button id="next" class="right attached ui button">Next <i class="right arrow icon"></i></button>
+    </div>
+
+    <div id="delete" class="ui modal fade" ng-controller="delete">
+        <i class="close icon black"></i>
+        <div class="header">
+            <i class="trash icon"></i> Confirm delete
+        </div>
+        <div class="middle aligned content">
+            <p>Do you want to proceed?</p>
+        </div>
+        <div class="actions">
+            <div class="ui buttons">
+                <div class="ui red cancel button">
+                    <i class="remove icon"></i>
+                    Cancel
+                </div>
+                <div ng-click="delete()" class="ui green button">
+                    <i class="checkmark icon"></i>
+                    Delete
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var id = null;
+        $('.action').click(function(e) {
+            id = $(this).data('id');
+            $($(this).data('target')).modal('show');
+        });
+
+        angular.element(document).ready(function() {
+            angular.bootstrap($('#delete'), ['delete']);
+        });
+
+        angular.module('delete', []).controller('delete', function ($scope, $http) {
+            $scope.delete = function(conference) {
+                var request = $http({
+                    method: "DELETE",
+                    url: "/student/" + id + "/delete"
+                });
+
+                request.success(function (response) {
+                    location.reload();
+                });
+            }
+        });
+    </script>
+
+    <script>
+        function search(i = 0, id = null) {
+            var search = $('#search').val();
+            var offset = Number($('#offset').val()) + Number(i);
+            var link = "/students/";
+
+            if (search || offset && offset > 0) {
+                link += "?";
+            }
+
+            if (search) {
+                link += "search=" + search;
+            }
+
+            if (id == 'search') {
+                offset = 0;
+            }
+
+            if (offset > 0) {
+                if (search && offset) {
+                    link += "&";
+                }
+                link += "offset=" + offset;
+            }
+
+            window.location = link;
+        }
+
+        $("#previous, #next").click(function() {
+            search($(this).attr('id') == 'next' ? 1 : -1);
+        });
+
+        $('#search, #offset').keypress(function (e) {
+            if (e.which == 13) {
+                search(0, $(this).attr('id'));
+            }
+        });
+    </script>
+{% endblock %}

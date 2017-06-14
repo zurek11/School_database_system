@@ -1,0 +1,6 @@
+/vendor
+/bower
+/misc/temp
+/misc/languages
+.env
+.DS_Store

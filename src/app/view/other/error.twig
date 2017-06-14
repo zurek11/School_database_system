@@ -1,0 +1,17 @@
+{% extends '_layout.twig' %}
+
+{% block title %}
+    {{ 'error'|trans|title }}
+{% endblock %}
+
+{% block content %}
+
+    <section id="error">
+        <a class="logo" href="/"></a>
+        <div class="error-content">
+            <h1>404</h1>
+            <h2>{{ 'pageNotFound'|trans }}</h2>
+        </div>
+    </section>
+    
+{% endblock %}

@@ -1,0 +1,56 @@
+{% if modal %}
+	<div id="popup" class="ui modal fade">
+		<div class="header">
+			<i class="announcement icon"></i>
+			<span>Info</span>
+			<i class="close icon black"></i>
+		</div>
+		<div class="middle aligned content">
+			{% if alerts is iterable %}
+				{% for alert in alerts %}
+					<p>{{ alert }}</p>
+				{% endfor %}
+			{% else %}
+				<p>{{ alerts }}</p>
+			{% endif %}
+		</div>
+		<div class="actions">
+		  <div class="ui buttons">
+				<div class="ui btn-blue cancel button">
+					<i class="remove icon"></i>
+					<span>Cance;</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+		$("#popup").modal("show");
+
+		$('#popup').modal({
+			selector : { close : '.close' }
+		});
+	</script>
+{% else %}
+	{% if alerts %}
+		<div class="ui {{ type }} message transition">
+			<i class="close icon"></i>
+			<div class="header">
+			</div>
+			{% if alerts is iterable %}
+				{% for alert in alerts %}
+					<p>{{ alert }}</p>
+				{% endfor %}
+			{% else %}
+				<p>{{ alerts }}</p>
+			{% endif %}
+		</div>
+
+		<script type="text/javascript">
+			$('.message .close').on('click', function() {
+				$(this).closest('.message').transition('fade');
+			});
+		</script>
+	{% endif %}
+{% endif %}

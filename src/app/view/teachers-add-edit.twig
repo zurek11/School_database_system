@@ -1,0 +1,47 @@
+{% extends '_layout.twig' %}
+
+{% block title %}
+    Teachers
+{% endblock %}
+
+{% block breadcrumb %}
+    <i class="user icon"></i>
+    <div class="active section">Teachers</div>
+    <i class="right angle icon divider"></i>
+    {% if id is empty %}
+        <i class="add icon"></i>
+        <div class="active section">
+            Add
+        </div>
+    {% else %}
+        <i class="edit icon"></i>
+        <div class="active section">
+            Edit
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include "other/alert-handling.twig" %}
+    <form class="ui form" method="post">
+        <div class="field">
+            <label>name</label>
+            <input type="text" name="name" placeholder="name" value="{{ _POST.name }}"/>
+        </div>
+
+        <div class="field">
+            <label>Surname</label>
+            <input type="text" name="surname" placeholder="Surname" value="{{ _POST.surname }}"/>
+        </div>
+
+        <button class="ui orange button button-independent" type="submit">
+            {% if id is empty %}
+                <i class="add icon"></i>
+                Add
+            {% else %}
+                <i class="edit icon"></i>
+                Edit
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,8 @@
+@green: #5CB85C;
+@red: #D9534F;
+@blue: #337AB7;
+@green: #60B044;
+@orange: #F0AD4E;
+
+@primaryColor: @blue;
+@secondaryColor: @green;

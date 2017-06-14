@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}{{ 'AMCEF project' }}{% endblock %}</title>
+
+	<!-- Authors -->
+	<meta name="author" content="AMCEF">
+
+	<!-- Site Meta -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Language" content="sk">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="/public/images/web/admin/favicon.png">
+	<link rel="icon" type="image/x-icon" href="/public/images/web/admin/favicon.png">
+	<link rel="apple-touch-icon" href="/public/images/web/admin/favicon.png">
+	<link rel="apple-touch-icon-precomposed" href="/public/images/web/admin/favicon.png">
+	<link rel="icon" type="image/png" href="/public/images/web/admin/favicon.png">
+
+	<!-- SEO Optimization -->
+	<link rel="canonical" href="http://www.amcef.sk/">
+	<meta property="og:locale" content="sk_SK">
+    <meta property="og:locale:alternate" content="en_US">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="AMCEF">
+    <meta property="og:description" content="Team AMCEF is ready for the challenge">
+	<meta property="og:url" content="http://www.amcef.sk/">
+	<meta property="og:site_name" content="AMCEF">
+	<meta property="fb:admins" content="amcef">
+    <meta property="og:image" content="http://www.amcef.sk/public/images/web/logo.png">
+	<meta name="keywords" content="AMCEF, website, creating website, e-shop, custom website design, web design company, web development company, mobile app development company, app development company, HTML, CSS, PHP, SASS, TWIG">
+	<meta name="description" content="Team AMCEF is ready for the challenge">
+	<meta name="robots" content="all">
+	<meta name="copyright" content="AMCEF, 2016">
+
+	<script type="text/javascript" src="/bower/jquery/dist/jquery.min.js"></script>
+
+	<!-- CSS Emelent Queries -->
+	<script src="/bower/css-element-queries/src/ResizeSensor.js"></script>
+	<script src="/bower/css-element-queries/src/ElementQueries.js"></script>
+
+    <!-- Semantic UI -->
+    <link rel="stylesheet" href="/bower/semantic/dist/semantic.min.css">
+    <script type="text/javascript" src="/bower/semantic/dist/semantic.js"></script>
+
+	<!-- Angular -->
+	<script type="text/javascript" src="/bower/angular/angular.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/public/assets/styles/common-styles.css" />
+	<link rel="stylesheet" type="text/css" href="/public/assets/styles/admin-custom.css" />
+
+	<script type="text/javascript" src="/public/assets/js/core.js"></script>
+</head>
+
+<body>
+	<div id="menu-left" class="text-blue bg-black {% if MENU_LEFT == true %}active{% endif %}">
+		<div class="item menu-logo">
+			<a>
+				<div class="menu-logo-content">
+					<p>School database</p>
+				</div>
+			</a>
+		</div>
+
+		<a href="/" class="item hover-orange">
+			<p>Dashboard</p>
+			<i class="bar chart icon"></i>
+		</a>
+		<a href="/students" class="item hover-orange">
+			<p>Students</p>
+			<i class="student icon"></i>
+		</a>
+		<a href="/teachers" class="item hover-orange">
+			<p>Teachers</p>
+			<i class="user icon"></i>
+		</a>
+	</div>
+
+	<div id="site-content" class="{% if MENU_LEFT == true %} menu-left {% endif %}">
+		<div id="banner">
+			<div class="banner-left">
+				<div class="item" id="menu-switch">
+					<i class="content icon large"></i>
+				</div>
+				<div class="menu-section item mobile-invisible">
+					{% block breadcrumb %}{% endblock %}
+				</div>
+			</div>
+		</div>
+
+		<div class="site-content-main">
+			{% block content %}{% endblock %}
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+		function ajaxGet(url) {
+			$.ajax({
+				type: "GET",
+				url: url
+			});
+        }
+        $('#menu-switch').click(function(){
+			ajaxGet("/app/session/ADMIN/MENU/LEFT");
+			$('#menu-left').toggleClass('active');
+			$('#site-content').toggleClass('menu-left');
+		});
+	</script>
+</body>
+</html>

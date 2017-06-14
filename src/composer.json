@@ -1,0 +1,15 @@
+{
+	"require": {
+		"slim/slim" : "2.3.5",
+		"slim/views": "~0.1",
+        "twig/twig": "~1.0",
+        "twig/extensions": "1.2",
+		"vlucas/phpdotenv": "2.2"
+	},
+	"autoload": {
+		"classmap": [
+            "app/controller",
+			"app/model"
+		]
+	}
+}
